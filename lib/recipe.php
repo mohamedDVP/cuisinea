@@ -1,21 +1,17 @@
 <?php
 
-$recipies = [
-        [
-          'title' => 'Mousse au chocolat',
-          'image' => '1-chocolate-au-mousse.jpg',
-          'description' => 'Mousse quick example text to build on the card title and make up the bulk of the card\'s content.'
-        ],
-        [
-          'title' => 'Gratin dauphinois',
-          'image' => '2-gratin-dauphinois.jpg',
-          'description' => 'Grattin quick example text to build on the card title and make up the bulk of the card\'s content.'
-        ],
-        [
-          'title' => 'Salade de chèvre',
-          'image' => '3-salade.jpg',
-          'description' => 'Chèvre quick example text to build on the card title and make up the bulk of the card\'s content.'
-        ]
-      ];
 
-?>
+      function getReipeById(PDO $pdo, int $id){
+        $query = $pdo->prepare("SELECT * FROM recipes WHERE id = :id");
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetch();
+      }
+
+      function getRecipeImage(string|null $image){
+        if($image === null){
+            return _ASSETS_IMG_PATH_.'recipe_default.jpg';
+        } else {
+        return _RECIPES_IMG_PATH_.$image;
+        }
+      }
