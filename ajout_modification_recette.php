@@ -1,12 +1,30 @@
 <?php
     require_once('templates/header.php');
     require_once('lib/recipe.php');
+    require_once('lib/category.php');
     require_once('lib/tools.php');
 
-    $message = [];
+    $messages = [];
     $errors = [];
 
+
+    $categories = getCategories($pdo);
+
     if(isset($_POST['saveRecipe'])){
+
+        // Si un fichier a été envoyé
+        if(isset($_FILES['file']['tmp_name']) && $_FILES['file']['tmp_name']!= ""){
+            // la méthode getimagesize retourne false si le fichier n'est pas une image
+            $checkImage = getimagesize($_FILES['file']['tmp_name']);
+            if($checkImage !== false){
+                // si c'est une image on traite
+                $fileName = uniqid().'-'.$_FILES['file']['name'];
+                move_uploaded_file($_FILES['file']['tmp_name'], _RECIPES_IMG_PATH_.$fileName);
+            }
+            else {
+                $errors[] = "Le fichier n'est pas une image";
+            }
+        }
         $res = saveRecipe($pdo, $_POST['category'], $_POST['title'], $_POST['description'], $_POST['ingredients'], $_POST['instructions'], null);
         if ($res){
             $message[] = "La recette a bien été sauvegardée";
@@ -48,9 +66,9 @@
         <div class="mb-3">
             <label for="category" class="form-label">Catégorie</label>
             <select name="category" id="category" class="form-select">
-                <option value="1">Entrée</option>
-                <option value="2">Plat</option>
-                <option value="3">Dessert</option>
+                <?php foreach ($categories as $category) {?>
+                    <option value="<?= $category['id']?>"><?= $category['name']?></option>
+                <?php }?>
             </select>
         </div>
 
