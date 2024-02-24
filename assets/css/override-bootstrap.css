@@ -12,14 +12,14 @@
     --bs-link-hover-color: var(--secondary);
 }
 
-  .btn-primary {
+.btn-primary {
     --bs-btn-color: #fff;
     --bs-btn-bg: var(--primary);
     --bs-btn-border-color: var(--secondary);
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-bg: #ffc697;
     --bs-btn-hover-border-color: var(--secondary);
-    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
     --bs-btn-active-color: #fff;
     --bs-btn-active-bg: #ff8e31;
     --bs-btn-active-border-color: var(--secondary);
@@ -35,7 +35,7 @@
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-bg: var(--secondary);
     --bs-btn-hover-border-color: var(--primary);
-    --bs-btn-focus-shadow-rgb: 13,110,253;
+    --bs-btn-focus-shadow-rgb: 13, 110, 253;
     --bs-btn-active-color: #fff;
     --bs-btn-active-bg: var(--primary);
     --bs-btn-active-border-color: var(--primary);
@@ -53,10 +53,11 @@
 }
 
 h1 {
-  color: var(--primary);
+    color: var(--primary);
 }
 
-h2, h3 {
+h2,
+h3 {
     color: var(--secondary);
 }
 
